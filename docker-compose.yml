@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  redis:
+     image: redis
+     container_name: redis
+     expose:
+        - 6379  
+  backend:
+    build: ./packages/backend
+    env_file:
+      - "./packages/backend/.env"
+    links:
+      - redis
+    volumes: 
+      - ./packages/backend/src:/srv/backend/src
+    ports:
+      - ${BACKEND_PORT}:${BACKEND_PORT}
+    command: npm run dev
+  frontend:
+    build: ./packages/frontend
+    env_file:
+      - "./packages/frontend/.env"
+    volumes: 
+      - ./packages/frontend/src:/srv/frontend/src
+      - ./packages/frontend/public:/srv/frontend/public    
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    links:
+      - backend
+    stdin_open: true
+    command: npm start

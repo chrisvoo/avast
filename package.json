@@ -1,0 +1,14 @@
+
+{
+  "name": "avast-homework",
+  "private": true,
+  "scripts": {
+    "start_backend": "lerna exec 'npm run dev' --scope=backend",
+    "test_backend": "lerna exec 'npm test' --scope=backend",
+    "start_frontend": "lerna exec 'npm start' --scope=frontend",
+    "test_frontend": "lerna exec 'npm test' --scope=frontend"
+  },
+  "devDependencies": {
+    "lerna": "^4.0.0"
+  }
+}
